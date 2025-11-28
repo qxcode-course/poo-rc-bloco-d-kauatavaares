@@ -1,6 +1,3 @@
-from hashlib import algorithms_guaranteed
-from sys import prefix
-
 
 class Fone:
     def __init__(self, id: str, number: str):
@@ -41,7 +38,7 @@ class Contact:
         if fone.isValid():
             self.fones.append(fone)
         else:
-            print("fail: numero invalido")
+            print("fail: invalid number")
     def rmFone(self, index: int):
         if 0 <= index < len(self.fones):
             self.fones.pop(index)
@@ -63,9 +60,9 @@ class Contact:
         self.name = name
 
     def __str__(self):
-        prefix = "@" if self.favorited else ""
+        prefixo = "@" if self.favorited else ""
         lista = ", ".join([str(f) for f in self.fones])
-        return f"-{prefix} {self.name} [{lista}]"
+        return f"-{prefixo} {self.name} [{lista}]"
 
 
 
@@ -84,13 +81,19 @@ def main():
         elif args[0] == "init":
             name = args[1] if len(args) > 1 else ""
             contact = Contact(name)
-
         elif args[0] == "show":
             print(contact)
         elif args[0] == "add":
             id = args[1]
             number = args[2]
             contact.addFone(id, number)
+        elif args[0] == "rm":
+            index = int(args[1])
+            contact.rmFone(index)
+        elif args[0] == " tfav":
+            contact.toogleFavorited()
+        else:
+            print("fail: comando invalido")
 
 
 
