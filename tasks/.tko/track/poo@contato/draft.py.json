@@ -92,8 +92,38 @@
         },
         {
             "label": "2025-11-28_10-00-09",
-            "content": "from hashlib import algorithms_guaranteed\nfrom sys import prefix\n\n\nclass Fone:\n    def __init__(self, id: str, number: str):\n        self.id = id\n        self.number = number\n\n    def isValid(self) -> bool:\n        valid = \"0123456789().\"\n        for caract in self.number:\n            if caract not in valid:\n                return False\n        return True\n\n    def getId(self) -> str:\n        return self.id\n\n    def getNumber(self) -> str:\n        return self.number\n\n    def setId(self, id: str):\n        self.id = id\n\n    def setNumber(self, number: str):\n        self.number = number\n\n    def __str__(self):\n        return f\"{self.id}:{self.number}\"\n\n\nclass Contact:\n    def __init__(self, name: str = \"\"):\n        self.name = name\n        self.favorited = False\n        self.fones: list[Fone] = []\n\n    def addFone(self, id: str, number: str):\n        fone = Fone(id, number)\n        if fone.isValid():\n            self.fones.append(fone)\n        else:\n            print(\"fail: invalid number\")\n    def rmFone(self, index: int):\n        if 0 <= index < len(self.fones):\n            self.fones.pop(index)\n        else:\n            print(\"fail: index errado\")\n    def toogleFavorited(self):\n        self.favorited = not self.favorited\n\n    def isFavorited(self) -> bool:\n        return self.favorited\n\n    def getFones(self):\n        return self.fones\n\n    def getName(self):\n        return self.name\n\n    def setName(self, name: str):\n        self.name = name\n\n    def __str__(self):\n        prefixo = \"@\" if self.favorited else \"\"\n        lista = \", \".join([str(f) for f in self.fones])\n        return f\"-{prefixo} {self.name} [{lista}]\"\n\n\n\n\n\n\ndef main():\n    contact = Contact\n    while True:\n        line = input()\n        print(\"$\" + line)\n        args = line.split()\n\n        if args[0] == \"end\":\n            break\n        elif args[0] == \"init\":\n            name = args[1] if len(args) > 1 else \"\"\n            contact = Contact(name)\n        elif args[0] == \"show\":\n            print(contact)\n        elif args[0] == \"add\":\n            id = args[1]\n            number = args[2]\n            contact.addFone(id, number)\n        elif args[0] == \"rm\":\n            index = int(args[1])\n            contact.rmFone(index)\n        elif args[0] == \" tfav\":\n            contact.toogleFavorited()\n        else:\n            print(\"fail: comando invalido\")\n\n\n\n\n\nmain()\n",
+            "content": "@@ -1,12 +1,78 @@\n+from hashlib import algorithms_guaranteed%0Afrom sys import prefix%0A%0A\n %0Aclass Fone:\n@@ -2352,15 +2352,18 @@\n ido%22)%0A%0A%0A\n+%0A%0A%0A\n main()%0A\n",
             "lines": "105"
+        },
+        {
+            "label": "2025-11-28_14-33-53",
+            "content": "@@ -2180,16 +2180,17 @@\n %5B0%5D == %22\n+ \n tfav%22:%0A \n",
+            "lines": "99"
+        },
+        {
+            "label": "2025-11-28_14-36-43",
+            "content": "@@ -1539,16 +1539,17 @@\n eturn f%22\n+-\n %7Bprefixo\n",
+            "lines": "99"
+        },
+        {
+            "label": "2025-11-28_14-37-11",
+            "content": "@@ -1543,10 +1543,8 @@\n n f%22\n-- \n %7Bpre\n",
+            "lines": "99"
+        },
+        {
+            "label": "2025-11-28_14-37-21",
+            "content": "@@ -1540,16 +1540,17 @@\n turn f%22-\n+ \n %7Bprefixo\n",
+            "lines": "99"
+        },
+        {
+            "label": "2025-11-28_14-37-26",
+            "content": "@@ -1410,32 +1410,80 @@\n  __str__(self):%0A\n+        prefixo = %22@%22 if self.favorited else %22%22%0A\n         lista = \n@@ -1534,99 +1534,8 @@\n     \n-if self.favorited:%0A            return f%22@ %7Bself.name%7D %5B%7Blista%7D%5D%22%0A        else:%0A            \n retu\n@@ -1540,16 +1540,25 @@\n turn f%22-\n+%7Bprefixo%7D\n  %7Bself.n\n@@ -1576,16 +1576,17 @@\n a%7D%5D%22%0A%0A%0A%0A\n+%0A\n %0A%0Adef ma\n",
+            "lines": "99"
+        },
+        {
+            "label": "2025-11-28_14-41-16",
+            "content": "\nclass Fone:\n    def __init__(self, id: str, number: str):\n        self.id = id\n        self.number = number\n\n    def isValid(self) -> bool:\n        valid = \"0123456789().\"\n        for caract in self.number:\n            if caract not in valid:\n                return False\n        return True\n\n    def getId(self) -> str:\n        return self.id\n\n    def getNumber(self) -> str:\n        return self.number\n\n    def setId(self, id: str):\n        self.id = id\n\n    def setNumber(self, number: str):\n        self.number = number\n\n    def __str__(self):\n        return f\"{self.id}:{self.number}\"\n\n\nclass Contact:\n    def __init__(self, name: str = \"\"):\n        self.name = name\n        self.favorited = False\n        self.fones: list[Fone] = []\n\n    def addFone(self, id: str, number: str):\n        fone = Fone(id, number)\n        if fone.isValid():\n            self.fones.append(fone)\n        else:\n            print(\"fail: invalid number\")\n    def rmFone(self, index: int):\n        if 0 <= index < len(self.fones):\n            self.fones.pop(index)\n        else:\n            print(\"fail: index errado\")\n    def toogleFavorited(self):\n        self.favorited = not self.favorited\n\n    def isFavorited(self) -> bool:\n        return self.favorited\n\n    def getFones(self):\n        return self.fones\n\n    def getName(self):\n        return self.name\n\n    def setName(self, name: str):\n        self.name = name\n\n    def __str__(self):\n        lista = \", \".join([str(f) for f in self.fones])\n        if self.favorited:\n            return f\"@ {self.name} [{lista}]\"\n        else:\n            return f\"- {self.name} [{lista}]\"\n\n\n\n\n\ndef main():\n    contact = Contact\n    while True:\n        line = input()\n        print(\"$\" + line)\n        args = line.split()\n\n        if args[0] == \"end\":\n            break\n        elif args[0] == \"init\":\n            name = args[1] if len(args) > 1 else \"\"\n            contact = Contact(name)\n        elif args[0] == \"show\":\n            print(contact)\n        elif args[0] == \"add\":\n            id = args[1]\n            number = args[2]\n            contact.addFone(id, number)\n        elif args[0] == \"rm\":\n            index = int(args[1])\n            contact.rmFone(index)\n        elif args[0] == \"tfav\":\n            contact.toogleFavorited()\n        else:\n            print(\"fail: comando invalido\")\n\n\nmain()\n",
+            "lines": "100"
         }
     ]
 }

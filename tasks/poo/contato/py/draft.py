@@ -60,10 +60,11 @@ class Contact:
         self.name = name
 
     def __str__(self):
-        prefixo = "@" if self.favorited else ""
         lista = ", ".join([str(f) for f in self.fones])
-        return f"-{prefixo} {self.name} [{lista}]"
-
+        if self.favorited:
+            return f"@ {self.name} [{lista}]"
+        else:
+            return f"- {self.name} [{lista}]"
 
 
 
@@ -90,13 +91,10 @@ def main():
         elif args[0] == "rm":
             index = int(args[1])
             contact.rmFone(index)
-        elif args[0] == " tfav":
+        elif args[0] == "tfav":
             contact.toogleFavorited()
         else:
             print("fail: comando invalido")
-
-
-
 
 
 main()
