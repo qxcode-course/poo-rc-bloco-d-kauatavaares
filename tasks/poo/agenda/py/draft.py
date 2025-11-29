@@ -96,8 +96,67 @@ class Agenda:
                     print("fail: numero invalido")
             self.contact.append(contact)
 
+    def rmContact(self, name: str):
+        pos = self.FindPos(name)
+        if pos != -1:
+            self.contact.pop(pos)
+        else:
+            print("fail: nao tem esse contato ai")
+
+
     def getContact(self, name: str):
         pos = self.FindPos(name)
         if pos != -1:
             return self.contact[pos]
         return None
+
+    def search(self, pattern: str) -> list[Contact]:
+        resultado = []
+        pattern = pattern.lower()
+
+        for contatos in self.contact:
+            texto = contatos.getName().lower()
+
+            for fones in contatos.fones:
+                texto += " " + fones.id.lower()
+                texto += " " + fones.number.lower()
+            if pattern in texto:
+                resultado.append(contatos)
+
+        return resultado
+
+    def getFavorited(self):
+        return [contatos for contatos in self.contact if contatos.favorited]
+
+    def getContacts(self):
+        return self.contact
+
+    def __str__(self):
+        return "\n".join(str(contatos) for contatos in self.contact)
+
+
+
+
+
+
+
+def main():
+    agenda = Agenda()
+    while True:
+        line = input()
+        print("$" + line)
+        args = line.split()
+
+        if args[0] == "end":
+            break
+        elif args[0] == "add":
+            name = args[1]
+            fones = []
+            for itens in args[2:]:
+                id, number = itens.split(":")
+                fones.append(Fone(id, number))
+            agenda.addContact(name, fones)
+        elif args[0] == "show":
+            print(agenda)
+
+main()
