@@ -1,70 +1,70 @@
 
 class Fone:
     def __init__(self, id: str, number: str):
-        self.id = id
-        self.number = number
+       self.__id = id
+       self.__number = number
 
     def isValid(self) -> bool:
         valid = "0123456789()."
-        for caract in self.number:
+        for caract in self.__number:
             if caract not in valid:
                 return False
         return True
 
     def getId(self) -> str:
-        return self.id
+        return self.__id
 
     def getNumber(self) -> str:
-        return self.number
+        return self.__number
 
     def setId(self, id: str):
-        self.id = id
+       self.__id = id
 
     def setNumber(self, number: str):
-        self.number = number
+       self.__number = number
 
     def __str__(self):
-        return f"{self.id}:{self.number}"
+        return f"{self.__id}:{self.__number}"
 
 
 class Contact:
     def __init__(self, name: str = ""):
-        self.name = name
-        self.favorited = False
-        self.fones: list[Fone] = []
+        self.__name  = name
+        self.__favorited = False
+        self.__fones: list[Fone] = []
 
     def addFone(self, id: str, number: str):
         fone = Fone(id, number)
         if fone.isValid():
-            self.fones.append(fone)
+            self.__fones.append(fone)
         else:
             print("fail: invalid number")
     def rmFone(self, index: int):
-        if 0 <= index < len(self.fones):
-            self.fones.pop(index)
+        if 0 <= index < len(self.__fones):
+            self.__fones.pop(index)
         else:
             print("fail: index errado")
     def toogleFavorited(self):
-        self.favorited = not self.favorited
+        self.__favorited = not self.__favorited
 
     def isFavorited(self) -> bool:
-        return self.favorited
+        return self.__favorited
 
     def getFones(self):
-        return self.fones
+        return self.__fones
 
     def getName(self):
-        return self.name
+        return self.__name
 
     def setName(self, name: str):
-        self.name = name
+       self.__name  = name
 
     def __str__(self):
-        lista = ", ".join([str(f) for f in self.fones])
-        if self.favorited:
-            return f"@ {self.name} [{lista}]"
+        lista = ", ".join([str(f) for f in self.__fones])
+        if self.__favorited:
+            return f"@ {self.__name} [{lista}]"
         else:
-            return f"- {self.name} [{lista}]"
+            return f"- {self.__name} [{lista}]"
 
 
 
